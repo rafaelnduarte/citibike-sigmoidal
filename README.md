@@ -1,4 +1,4 @@
-# Tutorial Avançado - Previsão de Uso do Citibike
+# Tutorial Avançado - Previsão de Uso do Citibike 🚲
 
 
   Este material é uma adaptação de um uso <b>avançado</b> do uso do [Hopsworks Feature Store](https://www.hopsworks.ai/feature-store); você está encarregado de prever o número de usuários do Citibike em cada estação do Citibike na cidade de Nova York.
