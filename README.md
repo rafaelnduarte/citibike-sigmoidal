@@ -1,55 +1,52 @@
-# <span style="font-width:bold; font-size: 3rem; color:#1EB182;"><img src="../../images/icon102.png" width="38px"></img> **Hopsworks Feature Store** </span><span style="font-width:bold; font-size: 3rem; color:#333;">Advanced Tutorial - Citibike Usage Prediction</span>
+# Tutorial Avançado - Previsão de Uso do Citibike
 
 
+  Este material é uma adaptação de um uso <b>avançado</b> do uso do [Hopsworks Feature Store](https://www.hopsworks.ai/feature-store); você está encarregado de prever o número de usuários do Citibike em cada estação do Citibike na cidade de Nova York.
 
-<span style="font-width:bold; font-size: 1.4rem;">
-  This is an <b>advanced example</b> of the Hopsworks <a href="https://www.hopsworks.ai/feature-store">Feature Store</a> usage; you are tasked with predicting the number of citibike users on each citibike station in the New York City.
+> O [Feature Store](https://www.hopsworks.ai/feature-store) é a parte essencial da infraestrutura de IA que ajuda as organizações a trazer dados empresariais modernos para sistemas analíticos e operacionais de ML. É a maneira mais simples e poderosa de levar seus modelos para produção. De qualquer lugar, para qualquer lugar.
+  Você carregará dados iniciais no feature store, criará dois grupos de características dos quais faremos uma visão de características e conjunto de dados de treinamento, e treinará um modelo para prever a quantidade de usuários do Citibike.
+  Além disso, você projetará um pipeline de geração de dados e inserção no Feature Store, que será executado uma vez por meio do <b>GitHub actions</b>.
 
-> The [Feature Store](https://www.hopsworks.ai/feature-store) is the essential part of AI infrastructure that helps organisations bring modern enterprise data to analytical and operational ML systems. It is the simplest most powerful way to get your models to production. From anywhere, to anywhere.
-  You will load starting data into the feature store, create two feature groups from which we will make a feature view and training dataset, and train a model to predict fare amounts.
-  Also, you will design a data-generating and Feature Store insertion pipeline, that will be running once a time using <b>GitHub actions</b>.
+  Um aplicativo <b>Streamlit</b> será criado para que você possa experimentar seu modelo interativamente.
 
-  <b>Streamlit</b> app will be created so you would be able to try your model interactively.
-
-   This is a <b>batch use case</b>, it will give you a high-level view of how to use our python APIs and the UI to navigate the feature groups.
+   Este é um <b>caso de uso em lote</b>, ele lhe dará uma visão geral de alto nível de como usar nossas APIs Python e a interface do usuário para navegar pelos grupos de características.
  </span>
 
-## **🗒️ This tutorial is divided into the following parts:**
-1. **Feature Backfill**: How to load, engineer and create feature groups.
-2. **Feature Pipeline**: How to parse new data and insert into feature groups.
-3. **Training Pipeline**: How to build a feature view, training dataset split, train a model and save it in the Model Registry.
-4. **Inference Pipeline**: How to retrieve a trained model from the model registry and use it for batch inference.
-5. Deploy a Streamlit app.
+## **🗒️ Este tutorial está dividido nas seguintes partes:**
+1. **Feature Backfill**: Como carregar, arquitetar e criar grupos de características.
+2. **Feature Pipeline**: Como analisar novos dados e inseri-los nos grupos de características.
+3. **Training Pipeline**: Como construir uma visão de features, dividir o conjunto de dados de treinamento, treinar um modelo e salvá-lo no Registro de Modelos.
+4. **Inference Pipeline**: Como recuperar um modelo treinado do registro de modelos e usá-lo para inferência em lote.
+5. Deploy de um aplicativo Streamlit.
 
-## Prerequisites
-To run this tutorial, you need an account on Hopsworks. You can create a new account at  [app.hopsworks.ai](https://app.hopsworks.ai).
-In the notebook you will be prompted with a link to generate an API token to interact with your Hopsworks account.
+## Pré-requisitos
+Para executar este tutorial, você precisa de uma conta no Hopsworks. Você pode criar uma nova conta em [app.hopsworks.ai](https://app.hopsworks.ai).
+No notebook, você será solicitado a um link para gerar um token de API para interagir com sua conta Hopsworks.
 
-Also, you obviously need to have [streamlit](https://docs.streamlit.io/library/get-started/installation)  python library installed.
+Além disso, você precisa ter a biblioteca [streamlit](https://docs.streamlit.io/library/get-started/installation) instalada.
 
+## Dados
+Você analisará dados meteorológicos, então você deve obter uma chave de API do [VisualCrossing](https://www.visualcrossing.com/). Você pode usar [este link](https://www.visualcrossing.com/weather-api).
 
-## Data
-You will parse weather data so you should get an API key from [VisualCrossing](https://www.visualcrossing.com/). You can use [this link](https://www.visualcrossing.com/weather-api).
+#### Crie um arquivo de configuração `.env` dentro deste diretório, onde todas as variáveis de ambiente necessárias serão armazenadas:
 
-#### Create an `.env` configuration file inside this directory where all the necessary environment variables will be stored:
+`WEATHER_API_KEY = "SUA_CHAVE_DE_API"`
 
-`WEATHER_API_KEY = "YOUR_API_KEY"`
-
-> If you done it after you run a notebook, restart the Python Kernel for this notebook (because `functions.py` does not have these variables in his namespace).
+> Se você fizer isso depois de executar um notebook, reinicie o Kernel do Python para este notebook (porque `functions.py` não terá essas variáveis em seu namespace).
 
 ![](images/api_keys_env_file.png)
 
-## Streamlit run
-To run streamlit app (after you have run all notebooks and already have required feature groups in Feature Store and model in Model Registry), simply type:
+## Execução do Streamlit
+Para executar o aplicativo streamlit (após ter executado todos os cadernos e já ter os grupos de características necessários no Feature Store e o modelo no Registro de Modelos), basta digitar:
 
-`python -m streamlit run streamlit_app.py` on Windows
+`python -m streamlit run streamlit_app.py` no Windows
 
-or
+ou
 
-`python3 -m streamlit run streamlit_app.py` on Unix
+`python3 -m streamlit run streamlit_app.py` no Unix
 
 
-## Streamlit usage examples
+## Exemplos de uso do Streamlit
 ![1.png](images/1.png)
 ![2.png](images/2.png)
 ![3.png](images/3.png)
